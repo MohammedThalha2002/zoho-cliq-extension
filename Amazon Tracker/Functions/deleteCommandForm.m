@@ -1,5 +1,10 @@
-key = arguments.get("key");
-id = key.remove("delete_key");
+
+response = Map();
+formValues = form.get("values");
+
+id = formValues.get("select").get("value");
+title = formValues.get("select").get("label");
+
 url = "https://amazon-scraper-black.vercel.app";
 track = invokeurl
 [
@@ -10,7 +15,7 @@ track = invokeurl
 response = Map();
 if(track.get("status") == "success")
 {
-	response.put("text","Your product is deleted successfully🔥");
+	response.put("text", title + " deleted successfully🔥");
 	bot = Map();
 	bot.put("name","Amazon Tracker");
 	bot.put("image","https://i.postimg.cc/KcKstCmd/logo.png");

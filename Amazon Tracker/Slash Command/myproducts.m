@@ -1,5 +1,5 @@
 
-url = "https://amazon-scraper-1etb.onrender.com";
+url = "https://amazon-scraper-black.vercel.app";
 tracks = invokeurl
 [
 	url :url + "/track-details/" + user.get("email")

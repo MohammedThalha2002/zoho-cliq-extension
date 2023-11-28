@@ -1,16 +1,21 @@
-key = arguments.get("key");
-id = key.remove("delete_key");
+
+response = Map();
+formValues = form.get("values");
+id = formValues.get("products").get("value");
+title = formValues.get("products").get("label");
+exp_price = formValues.get("expected-price");
+
 url = "https://amazon-scraper-black.vercel.app";
 track = invokeurl
 [
-	url :url + "/delete/" + id
-	type :DELETE
+	url :url + "/update-price/" + id + "/" + exp_price
+	type :PUT
 	connection:"amazontracker"
 ];
 response = Map();
 if(track.get("status") == "success")
 {
-	response.put("text","Your product is deleted successfully🔥");
+	response.put("text", title + "'s price updated successfully🔥");
 	bot = Map();
 	bot.put("name","Amazon Tracker");
 	bot.put("image","https://i.postimg.cc/KcKstCmd/logo.png");
