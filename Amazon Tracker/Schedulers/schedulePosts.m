@@ -1,15 +1,16 @@
 
-url = "https://amazon-scraper-1etb.onrender.com";
+url = "https://amazon-scraper-black.vercel.app";
 tracks = invokeurl
 [
 	url :url + "/track-details/" + user.get("email")
 	type :GET
 	connection:"amazontracker"
 ];
-msg = "";
-count = 1;
+rows = List();
+tracks = tracks.toList();
 for each  track in tracks
 {
+	row = Map();
 	curr_price = track.get("curr_price");
 	if(curr_price == 0)
 	{
@@ -18,19 +19,16 @@ for each  track in tracks
 	title = track.get("url").remove("https://www.amazon.in/");
 	i = title.indexOf("/");
 	title = title.subString(0,i);
-	msg = msg + count + ". " + title + "\n";
-	msg = msg + "Expected price : ₹" + track.get("exp_price") + "\n";
-	msg = msg + "Current price : ₹" + curr_price + "\n";
-	msg = msg + "Product Link : [link](" + track.get("url") + ")\n\n";
-	count = count + 1;
+	title = title.replaceAll("-", " ");
+	row.put("Title",title);
+	row.put("Current Price","₹" + curr_price);
+	row.put("Expected Price","₹" + track.get("exp_price"));
+	row.put("Url","[link](" + track.get("url") + ")");
+	rows.add(row);
 }
-response = Map();
-response.put("text",msg);
+greetings = "! Good Morning🌞!\nReady to make today amazing😉? Don't forget to check out the latest deals waiting for you today.\nYour favorite items may be just a click away.";
 bot = Map();
 bot.put("name","Amazon Tracker");
 bot.put("image","https://i.postimg.cc/KcKstCmd/logo.png");
-response.put("bot",bot);
-card = Map();
-card.put("title","Your Products🎉");
-response.put("card",card);
-zoho.cliq.postToBot("amazontracker",response);
+message = {"text":"Hey " + user.get("first_name") + greetings,"bot":bot,"slides":{{"type":"table","title":"","data":{"headers":{"Title","Current Price","Expected Price","Url"},"rows":rows}}}};
+zoho.cliq.postToBot("amazontracker",message);
