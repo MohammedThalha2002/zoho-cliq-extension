@@ -2,6 +2,20 @@
 sections = list();
 tabsArr = {{"label":"My Products","id":"myproducts"}};
 elements = list();
+// delete the product
+key = target.get("id");
+id = key.remove("delete");
+url = "https://amazon-scraper-black.vercel.app";
+track = invokeurl
+[
+	url :url + "/delete/" + id
+	type :DELETE
+	connection:"amazontracker"
+];
+// again fetch the products
+sections = list();
+tabsArr = {{"label":"My Products","id":"myproducts"}};
+elements = list();
 url = "https://amazon-scraper-black.vercel.app";
 tracks = invokeurl
 [
@@ -19,24 +33,9 @@ if(tracks.size() > 0)
 		id = track.get("_id");
 		curr_price = track.get("curr_price");
 		exp_price = track.get("exp_price");
-		features = track.get("features").get(0);
-		tracking = track.get("track_enabled");
-		// text & subtext
-		elements.add({"type":"subtext","text":"📦" + features});
-		elements.add({"type":"text","text":"*💸Curr Price* : ₹" + curr_price + "\n*💵Exp Price* : ₹" + exp_price});
-		// buttons
-		buttons = List();
-		buttons.add({"label":"Update","type":"invoke.function","name":"WIDGETupdatePrice","id":"update" + id,"emotion":"positive"});
-		buttons.add({"label":"Delete","type":"invoke.function","name":"WIDGETdeleteProduct","id":"delete" + id,"emotion":"negative"});
-		buttons.add({"label":"More...","type":"invoke.function","name":"WIDGETshowWeb","id":"more" + id,"emotion":"neutral"});
-		if(tracking == true){
-			buttons.add({"label":"Disable","type":"invoke.function","name":"WIDGETenableORdiableTracking","id":"disable" + id, "emotion":"negative"});
-		} else {
-			buttons.add({"label":"Enable","type":"invoke.function","name":"WIDGETenableORdiableTracking","id":"enable" + id, "emotion":"positive"});
-		}
-		// 		
-		elements.add({"type":"buttons","buttons": buttons });
-		//
+		elements.add({"type":"text","text":"*Curr Price* : ₹" + curr_price + "\n*Exp Price* : ₹" + exp_price});
+		// buttons and dividers 		
+		elements.add({"type":"buttons","buttons":{{"label":"Update","type":"invoke.function","name":"WIDGETupdatePrice","id":"update" + id,"emotion":"positive"},{"label":"Delete","type":"invoke.function","name":"WIDGETdeleteProduct","id":"delete" + id,"emotion":"negative"},{"label":"More...","type":"invoke.function","name":"WIDGETshowWeb","id":"more" + id,"emotion":"neutral"}}});
 		elements.add({"type":"divider"});
 		count = count + 1;
 	}
