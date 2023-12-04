@@ -10,15 +10,12 @@ track = invokeurl
 [
 	url :url + "/delete/" + id
 	type :DELETE
-	connection:"amazontracker"
 ];
-
 // again fetch the products
 tracks = invokeurl
 [
 	url :url + "/track-details/" + user.get("email") + "/" + 1
 	type :GET
-	connection:"amazontracker"
 ];
 meta = tracks;
 tracks = tracks.get("docs").toList();

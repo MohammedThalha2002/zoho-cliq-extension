@@ -9,7 +9,9 @@ track = invokeurl
 	parameters : params
 ];
 
-description = track.get("features").get(0);
+title = track.get("title");
+imgUrl = track.get("imgUrl");
+features = track.get("features");
 curr_price = track.get("curr_price");
 inStock = track.get("inStock");
 if(inStock == true)
@@ -44,12 +46,12 @@ if(rating < 1)
 }
 
 return {
-   "title": track.get("title"),
+   "title": title,
    "type": "link",
    "provider_url": "https://www.amazon.in/",
    "faviconlink": "https://i.postimg.cc/qqCBQZKB/free-amazon-2296099-1912058.png",
-   "thumbnail_url": track.get("imgUrl"),
-   "description": description,
+   "thumbnail_url": imgUrl,
+   "description": features.get(0),
    "fields": {
       "data": [
          {
@@ -73,7 +75,13 @@ return {
          "label": "Add Product",
          "type": "button",
          "params": {
-            "action": "addProduct"
+            "action": "addProduct",
+			"title" : title,
+			"features" : features,
+			"imgUrl" : imgUrl,
+			"inStock" : track.get("inStock"),
+			"rating" : rating,
+			"curr_price" : curr_price
          }
       }
    ],

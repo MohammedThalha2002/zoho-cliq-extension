@@ -10,7 +10,6 @@ track = invokeurl
 [
 	url :url + "/update-price/" + id + "/" + exp_price
 	type :PUT
-	connection:"amazontracker"
 ];
 
 if(track.get("status") == "success")

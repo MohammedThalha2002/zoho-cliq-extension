@@ -10,7 +10,6 @@ track = invokeurl
 [
 	url :url + "/delete/" + id
 	type :DELETE
-	connection:"amazontracker"
 ];
 
 if(track.get("status") == "success")

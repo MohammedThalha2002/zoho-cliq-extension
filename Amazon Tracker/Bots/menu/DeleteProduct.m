@@ -1,5 +1,4 @@
 
-url = "https://amazon-scraper-black.vercel.app";
 tracks = invokeurl
 [
 	url :url + "/track-details/" + user.get("email")

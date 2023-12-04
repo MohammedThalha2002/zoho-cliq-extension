@@ -1,36 +1,35 @@
+
 sections = list();
 tabsArr = {{"label":"My Products","id":"myproducts"}};
 elements = list();
 url = "https://amazon-scraper-black.vercel.app";
-
 // enable or disable tracking of the product
 key = target.get("id");
-if(key.contains("disable")){
-// 	disable the track
+if(key.contains("disable"))
+{
+	// 	disable the track
 	id = key.remove("disable");
 	track = invokeurl
 	[
 		url :url + "/disable-tracking/" + id
 		type :PUT
-		connection:"amazontracker"
 	];
-} else {
-// 	enable the track
+}
+else
+{
+	// 	enable the track
 	id = key.remove("enable");
 	track = invokeurl
 	[
 		url :url + "/enable-tracking/" + id
 		type :PUT
-		connection:"amazontracker"
 	];
 }
-
 // again fetch the data
 tracks = invokeurl
 [
 	url :url + "/track-details/" + user.get("email") + "/" + 1
 	type :GET
-	connection:"amazontracker"
 ];
 meta = tracks;
 tracks = tracks.get("docs").toList();

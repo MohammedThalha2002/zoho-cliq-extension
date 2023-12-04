@@ -17,7 +17,6 @@ tracks = invokeurl
 [
 	url :url + "/track-details/" + user.get("email") + "/" + curr_page
 	type :GET
-	connection:"amazontracker"
 ];
 meta = tracks;
 tracks = tracks.get("docs").toList();
@@ -60,7 +59,7 @@ else
 {
 	elements.add({"type":"text","text":"No tracked products found! 😕\nIt seems like you haven't added any Amazon products to track yet. To get started, use the /newproduct command to add a product or visit the Amazon website to find items you'd like to monitor. 🛍️✨"});
 }
-header = {"title":"My Products","navigation":"new","buttons":{{"label":"Add Product","type":"invoke.function","name":"WIDGETaddProduct","id":"section","emotion":"positive"}}};
+header = {"title":"Page " + meta.get("page"),"navigation":"continue","buttons":{{"label":"Add Product","type":"invoke.function","name":"WIDGETaddProduct","id":"section","emotion":"positive"}}};
 // 
 buttons = List();
 if(meta.get("hasPrevPage") == true)
