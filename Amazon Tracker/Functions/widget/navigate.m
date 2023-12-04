@@ -1,28 +1,27 @@
 
-sections = list();
-tabsArr = {{"label":"My Products","id":"myproducts"}};
-elements = list();
-// delete the product
 key = target.get("id");
-id = key.remove("delete");
+curr_page = 1;
+if(key.contains("next"))
+{
+	curr_page = key.remove("next_");
+}
+else
+{
+	curr_page = key.remove("prev_");
+}
+sections = list();
+tabsArr = {{"label":"My Products" + curr_page,"id":"myproducts"}};
+elements = list();
 url = "https://amazon-scraper-black.vercel.app";
-track = invokeurl
-[
-	url :url + "/delete/" + id
-	type :DELETE
-	connection:"amazontracker"
-];
-
-// again fetch the products
 tracks = invokeurl
 [
-	url :url + "/track-details/" + user.get("email") + "/" + 1
+	url :url + "/track-details/" + user.get("email") + "/" + curr_page
 	type :GET
 	connection:"amazontracker"
 ];
 meta = tracks;
 tracks = tracks.get("docs").toList();
-limit = 2;
+limit = 5;
 if(tracks.size() > 0)
 {
 	count = (meta.get("page") - 1) * 2 + 1;

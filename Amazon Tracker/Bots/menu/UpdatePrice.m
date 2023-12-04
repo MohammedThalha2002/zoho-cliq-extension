@@ -7,7 +7,7 @@ tracks = invokeurl
 	connection:"amazontracker"
 ];
 options = List();
-tracks = tracks.get("docs").toList();
+tracks = tracks.toList();
 if(tracks.size() > 0)
 {
 	for each  track in tracks

@@ -1,15 +1,13 @@
 
 response = Map();
-formValues = form.get("values");
-
-id = formValues.get("select").get("value");
-title = formValues.get("select").get("label");
-
+formData = form.get("values");
+id = formData.get("product_id");
+exp_price = formData.get("exp_price");
 url = "https://amazon-scraper-black.vercel.app";
 track = invokeurl
 [
-	url :url + "/delete/" + id
-	type :DELETE
+	url :url + "/update-price/" + id + "/" + exp_price
+	type :PUT
 	connection:"amazontracker"
 ];
 

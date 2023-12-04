@@ -23,25 +23,21 @@ if(url != null && price != null)
 	];
 	if(track.get("status") == "success")
 	{
-		response.put("text","Your product track is enabled successfully🔥");
-		bot = Map();
-		bot.put("name","Amazon Tracker");
-		bot.put("image","https://i.postimg.cc/KcKstCmd/logo.png");
-		response.put("bot",bot);
-		card = Map();
-		card.put("title","Congratulations🎉");
-		response.put("card",card);
+		// 		response.put("text","Your product track is enabled successfully🔥");
+		// 		bot = Map();
+		// 		bot.put("name","Amazon Tracker");
+		// 		bot.put("image","https://i.postimg.cc/KcKstCmd/logo.png");
+		// 		response.put("bot",bot);
+		// 		card = Map();
+		// 		card.put("title","Congratulations🎉");
+		// 		response.put("card",card);
+		result = {"text":"Product added successfully🔥","status":"success","type":"banner"};
+		return result;
 	}
 	else
 	{
-		response.put("text","Something went wrong😓" + track);
-		bot = Map();
-		bot.put("name","Amazon Tracker");
-		bot.put("image","https://i.postimg.cc/KcKstCmd/logo.png");
-		response.put("bot",bot);
-		card = Map();
-		card.put("title","Failed🚩");
-		response.put("card",card);
+		result = {"text":"Something went wrong 😓","status":"failure","type":"banner"};
+		return result;
 	}
 }
 else
